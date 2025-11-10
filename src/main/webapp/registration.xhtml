@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Student Registration</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div class="header">
+                <h1>📝 Student Registration</h1>
+                <p>Please fill in all the required information</p>
+            </div>
+            
+            <div class="content">
+                <h:form id="registrationForm">
+                    <h:messages globalOnly="true" styleClass="error-message" errorClass="error-message"/>
+                    
+                    <div class="form-container">
+                        <h3 style="color: #667eea; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #667eea;">
+                            Personal Information
+                        </h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <h:outputLabel for="firstName" value="First Name *"/>
+                                <h:inputText id="firstName" 
+                                           value="#{registrationBean.student.firstName}" 
+                                           required="true"
+                                           requiredMessage="First name is required"
+                                           styleClass="form-control"/>
+                                <h:message for="firstName" styleClass="error-message"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <h:outputLabel for="lastName" value="Last Name *"/>
+                                <h:inputText id="lastName" 
+                                           value="#{registrationBean.student.lastName}" 
+                                           required="true"
+                                           requiredMessage="Last name is required"
+                                           styleClass="form-control"/>
+                                <h:message for="lastName" styleClass="error-message"/>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <h:outputLabel for="email" value="Email Address *"/>
+                                <h:inputText id="email" 
+                                           value="#{registrationBean.student.email}" 
+                                           required="true"
+                                           requiredMessage="Email is required"
+                                           styleClass="form-control">
+                                    <f:validator validatorId="emailValidator"/>
+                                </h:inputText>
+                                <h:message for="email" styleClass="error-message"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <h:outputLabel for="phone" value="Phone Number *"/>
+                                <h:inputText id="phone" 
+                                           value="#{registrationBean.student.phone}" 
+                                           required="true"
+                                           requiredMessage="Phone number is required"
+                                           styleClass="form-control">
+                                    <f:validator validatorId="phoneValidator"/>
+                                </h:inputText>
+                                <h:message for="phone" styleClass="error-message"/>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <h:outputLabel for="dateOfBirth" value="Date of Birth *"/>
+                                <h:inputText id="dateOfBirth" 
+                                           value="#{registrationBean.student.dateOfBirth}" 
+                                           required="true"
+                                           requiredMessage="Date of birth is required"
+                                           styleClass="form-control">
+                                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                </h:inputText>
+                                <p style="font-size: 0.85em; color: #666; margin-top: 5px;">Format: YYYY-MM-DD (Age must be between 16-100 years)</p>
+                                <h:message for="dateOfBirth" styleClass="error-message"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <h:outputLabel for="course" value="Select Course *"/>
+                                <h:selectOneMenu id="course" 
+                                               value="#{registrationBean.selectedCourseId}" 
+                                               required="true"
+                                               requiredMessage="Please select a course"
+                                               styleClass="form-control"
+                                               valueChangeListener="#{registrationBean.onCourseChange}">
+                                    <f:selectItem itemLabel="-- Select Course --" itemValue=""/>
+                                    <f:selectItems value="#{registrationBean.availableCourses}" 
+                                                 var="course"
+                                                 itemLabel="#{course.courseName} (#{course.courseCode}) - ₹#{course.fee}"
+                                                 itemValue="#{course.courseId}"/>
+                                    <f:converter converterId="courseConverter"/>
+                                    <f:ajax event="change" render="courseDetails"/>
+                                </h:selectOneMenu>
+                                <h:message for="course" styleClass="error-message"/>
+                                <h:panelGroup id="courseDetails">
+                                    <h:outputText value="Selected Course Fee: ₹#{registrationBean.selectedCourse.fee}" 
+                                                  rendered="#{not empty registrationBean.selectedCourse}"
+                                                  style="color: #667eea; font-weight: bold; margin-top: 5px; display: block;"/>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-container">
+                        <h3 style="color: #667eea; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #667eea;">
+                            Address Information
+                        </h3>
+                        
+                        <div class="form-group">
+                            <h:outputLabel for="address" value="Street Address"/>
+                            <h:inputText id="address" 
+                                       value="#{registrationBean.student.address}" 
+                                       styleClass="form-control"/>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <h:outputLabel for="city" value="City"/>
+                                <h:inputText id="city" 
+                                           value="#{registrationBean.student.city}" 
+                                           styleClass="form-control"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <h:outputLabel for="state" value="State"/>
+                                <h:inputText id="state" 
+                                           value="#{registrationBean.student.state}" 
+                                           styleClass="form-control"/>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <h:outputLabel for="zipCode" value="Zip Code"/>
+                            <h:inputText id="zipCode" 
+                                       value="#{registrationBean.student.zipCode}" 
+                                       styleClass="form-control"/>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 30px;">
+                        <h:commandButton value="Submit Registration" 
+                                       action="#{registrationBean.register}"
+                                       actionListener="#{registrationBean.onFormSubmit}"
+                                       styleClass="btn-primary"
+                                       style="padding: 15px 50px; font-size: 1.2em;"/>
+                    </div>
+                </h:form>
+            </div>
+            
+            <div class="navigation">
+                <h:link outcome="welcome" value="← Back to Welcome"/>
+            </div>
+        </div>
+    </h:body>
+</html>
+

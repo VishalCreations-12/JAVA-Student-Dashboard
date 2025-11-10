@@ -1,0 +1,105 @@
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Package Files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE - IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# IDE - Eclipse
+.classpath
+.project
+.settings/
+bin/
+.metadata
+
+# IDE - NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# IDE - VS Code
+.vscode/
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# H2 Database files
+*.mv.db
+*.trace.db
+*.lock.db
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
+.*.sw?
+
+# Application specific
+*.bat
+*.sh
+!RUN_COMPLETE_SERVER.bat
+
+# Standalone website (not part of JSF project)
+website/
+
+# Extra documentation files (keep main README.md)
+COMPLETE_SETUP_README.md
+DATABASE_SETUP.md
+DEPLOYMENT.md
+QUICK_START.md
+PROJECT_SUMMARY.md
+REQUIREMENTS_CHECKLIST.md
+README_WHERE_TO_SEE.txt
+OPEN_WEBSITE.html
+
+# Keep these documentation files
+!DEMO_PRESENTATION_SCRIPT.md
+!LICENSE
+!README.md
+!CONTRIBUTING.md
+!GITHUB_SETUP.md
+
+# Logs
+logs/
+*.log.*
+
+# Test output
+test-output/
