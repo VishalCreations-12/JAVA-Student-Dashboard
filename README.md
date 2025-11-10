@@ -1,4 +1,3 @@
-Here is a 5-line `README.md` summary based on your detailed file:
 
 # 🎓 Student Admission Portal (JSF + Hibernate)
 
