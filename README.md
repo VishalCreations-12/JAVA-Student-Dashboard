@@ -12,3 +12,6 @@ mvn clean package && mvn jetty:run
 ```
 
 **Access:** `http://localhost:8080/student-admission-portal/welcome.xhtml`
+
+
+Done by Vishal
